@@ -8,7 +8,7 @@ export async function clientLoader({ params }) {
   // Fake network delay of 500ms
   await new Promise((resolve) => setTimeout(resolve, 500));
 
-    return {
+  return {
     threadId,
     messages: [
       {
