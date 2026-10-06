@@ -98,3 +98,20 @@ export default function Layout() {
     </div>
   );
 }
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+export async function clientLoader() {
+  const url = `${supabaseUrl}/rest/v1/threads?select=*&order=created_at.desc`;
+
+  const response = await fetch(url, {
+    headers: {
+      apikey: supabaseKey,
+      Authorization: `Bearer ${supabaseKey}`,
+    },
+  });
+
+  if (!response.ok) throw new Error("Could not load threads");
+
+  return await response.json();
+}
